@@ -2,9 +2,15 @@ new Vue ({
     el: "#app",
     data: {
         query: "",
-        movieList: []
+        movieList: [],
+        myFlagClass: "",
+        defaultFlag: "flag-icon-default"
+    },
+    computed: {
     },
     methods: {
+
+        //funzione che carica i film in base alla ricerca nell'input
         doSearch() {
             axios.get("https://api.themoviedb.org/3/search/movie", {
                 params: {
@@ -15,6 +21,22 @@ new Vue ({
             }).then((resp) => {
                 this.movieList = resp.data.results;
             })
+        },
+        
+        //funzione che traduce la lingua dell'oggetto in classe per la flag
+        getFlag(language) {
+            const langToCountry = {
+                "en" : ["us", "gb", "ca"],
+                "es" : ["es", "ar", "cu", "mx"],
+                "de" : ["de", "be", "li"],
+                "it" : ["it", "sm"]
+            };
+
+            if (!langToCountry[language]) {
+                return this.defaultFlag;
+            }
+            
+            return `flag-icon-${langToCountry[language][0]}`;
         }
     }
 })

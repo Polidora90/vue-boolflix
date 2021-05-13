@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css ">
     <link rel="stylesheet" href="styles/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -19,7 +20,10 @@
 
         <!-- lista dei film trovati -->
         <ul>
-            <li v-for="movie in movieList">Titolo:"{{movie.title}}"; Titolo originale:"{{movie.original_title}}"; Lingua originale: {{movie.original_language}}; Voto: {{movie.vote_average}}.</li>
+            <li v-for="movie in movieList">Titolo:"{{movie.title}}"; 
+                Titolo originale:"{{movie.original_title}}"; 
+                Lingua originale: <span class="flag-icon" :class="getFlag(movie.original_language)"></span>{{movie.original_language}}; 
+                Voto: {{movie.vote_average}}.</li>
         </ul>
     </div>
 
