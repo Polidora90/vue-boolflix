@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <title>Boolflix</title>
+</head>
+<body>
+    <div id="app">
+        <!-- input e button cerca -->
+        <input type="text" v-model="query">
+        <button @click="doSearch">Cerca</button>
+
+        <!-- lista dei film trovati -->
+        <ul>
+            <li v-for="movie in movieList">Film</li>
+        </ul>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
