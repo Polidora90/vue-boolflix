@@ -24,7 +24,8 @@
             <li v-for="movie in movieList">Titolo:"{{movie.title}}"; 
                 Titolo originale:"{{movie.original_title}}"; 
                 Lingua originale: <span class="flag-icon" :class="getFlag(movie.original_language)"></span>{{movie.original_language}}; 
-                Voto: {{movie.vote_average}}.</li>
+                Voto: {{movie.vote_average}};
+                Poster: <img :src="generateUrl(movie.poster_path)" alt=""></li>
         </ul>
 
         <!-- lista delle serie tv -->
@@ -33,7 +34,8 @@
             <li v-for="tvSerie in tvSeriesList">Titolo:"{{tvSerie.title}}"; 
                 Titolo originale:"{{tvSerie.original_title}}"; 
                 Lingua originale: <span class="flag-icon" :class="getFlag(tvSerie.original_language)"></span>{{tvSerie.original_language}}; 
-                Voto: {{tvSerie.vote_average}}.</li>
+                Voto: {{tvSerie.vote_average}};
+                Poster: <img :src="generateUrl(tvSerie.poster_path)" alt=""></li>
         </ul>
 
     </div>

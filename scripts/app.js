@@ -5,12 +5,12 @@ new Vue ({
         movieList: [],
         tvSeriesList: [],
         myFlagClass: "",
-        defaultFlag: "flag-icon-default"
+        defaultFlag: "flag-icon-default",
+        sizeCode: "w342",
     },
     computed: {
     },
     methods: {
-
         //funzione che crea due array separati da una sola chiamata grazie all'argomento searchType
         makeAxiosSearch(searchType) {
             axios.get("https://api.themoviedb.org/3/search/" + searchType, {
@@ -54,6 +54,21 @@ new Vue ({
             }
             
             return `flag-icon-${langToCountry[language][0]}`;
+        },
+
+        //funzione che crea l'url del poster
+        generateUrl(apiPath) {
+            /*
+            l'url è formato da 3 parti:
+            1- sempre uguale, è la base delle immagini tmdb:
+                https://image.tmdb.org/t/p/
+            2 - codice dimensioni. Es:
+                w342
+            3- la parte finale è la stringa passata dall'api alla voce
+                poster_path
+           */
+
+            return `https://image.tmdb.org/t/p/${this.sizeCode}${apiPath}`;
         }
     }
 })
