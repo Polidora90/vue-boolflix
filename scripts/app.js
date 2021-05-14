@@ -23,7 +23,12 @@ new Vue ({
                 if (searchType === "movie") {
                     this.movieList = resp.data.results;
                 } else if (searchType === "tv") {
-                    this.tvSeriesList = resp.data.results;
+                    this.tvSeriesList = resp.data.results.map((tvShow) => {
+                        tvShow.original_title = tvShow.original_name;
+                        tvShow.title = tvShow.name;
+
+                        return tvShow;
+                    })
                 }
             })
         },

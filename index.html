@@ -15,16 +15,27 @@
 <body>
     <div id="app">
         <!-- input e button cerca -->
-        <input type="text" v-model="query">
+        <input type="text" v-model="query" placeholder="Cerca film o serie tv">
         <button @click="doSearch">Cerca</button>
 
         <!-- lista dei film trovati -->
+        <h2 v-if="movieList.length !== 0">Movies</h2>
         <ul>
             <li v-for="movie in movieList">Titolo:"{{movie.title}}"; 
                 Titolo originale:"{{movie.original_title}}"; 
                 Lingua originale: <span class="flag-icon" :class="getFlag(movie.original_language)"></span>{{movie.original_language}}; 
                 Voto: {{movie.vote_average}}.</li>
         </ul>
+
+        <!-- lista delle serie tv -->
+        <h2 v-if="tvSeriesList.length !== 0">Tv Series</h2>
+        <ul>
+            <li v-for="tvSerie in tvSeriesList">Titolo:"{{tvSerie.title}}"; 
+                Titolo originale:"{{tvSerie.original_title}}"; 
+                Lingua originale: <span class="flag-icon" :class="getFlag(tvSerie.original_language)"></span>{{tvSerie.original_language}}; 
+                Voto: {{tvSerie.vote_average}}.</li>
+        </ul>
+
     </div>
 
     <script src="scripts/app.js"></script>
