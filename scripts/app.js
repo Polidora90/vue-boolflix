@@ -7,6 +7,7 @@ new Vue ({
         myFlagClass: "",
         defaultFlag: "flag-icon-default",
         sizeCode: "w185",
+        newVote: 0
     },
     computed: {
     },
@@ -75,6 +76,22 @@ new Vue ({
 
             return `https://image.tmdb.org/t/p/${this.sizeCode}${apiPath}`;
 
+        },
+
+        //funzione che converte i voti in numeri da 1 a 5
+        generateVote(originalVote) {
+            /*
+            -Ho il voto espresso con num decim da 1 a 10 in vote_average
+                -devo gestire il caso in cui il valore zia 0
+            -posso creare un nuovo valore dividendo vote_average per due e
+                arrotondando il risultato in eccesso con math.
+            -devo far ciclare le stelle per farle comparire
+                ora ciclano nella funzione.
+                non so se mi piace.
+            -per ottenere risultati specifici per ogni show il valore del voto
+                devev essere l'argomento della funz che specificherò in html.
+            */
+            return newVote = Math.ceil(originalVote / 2);
         }
     }
 })
