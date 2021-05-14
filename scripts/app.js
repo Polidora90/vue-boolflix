@@ -6,7 +6,7 @@ new Vue ({
         tvSeriesList: [],
         myFlagClass: "",
         defaultFlag: "flag-icon-default",
-        sizeCode: "w342",
+        sizeCode: "w185",
     },
     computed: {
     },
@@ -66,9 +66,15 @@ new Vue ({
                 w342
             3- la parte finale è la stringa passata dall'api alla voce
                 poster_path
+            4- alcuni poster_path sono null.
            */
 
+            if (apiPath == null) {
+                return "";
+            }
+
             return `https://image.tmdb.org/t/p/${this.sizeCode}${apiPath}`;
+
         }
     }
 })
