@@ -6,10 +6,13 @@ new Vue ({
         tvSeriesList: [],
         myFlagClass: "",
         defaultFlag: "flag-icon-default",
-        sizeCode: "w185",
+        sizeCode: "w342",
         newVote: 0
     },
     computed: {
+        fullMoviesList() {
+            return this.movieList.concat(this.tvSeriesList);
+        }
     },
     methods: {
         //funzione che crea due array separati da una sola chiamata grazie all'argomento searchType
@@ -27,6 +30,7 @@ new Vue ({
                     this.tvSeriesList = resp.data.results.map((tvShow) => {
                         tvShow.original_title = tvShow.original_name;
                         tvShow.title = tvShow.name;
+                        tvShow.tvSeries = true;
 
                         return tvShow;
                     })
@@ -47,7 +51,8 @@ new Vue ({
                 "en" : ["us", "gb", "ca"],
                 "es" : ["es", "ar", "cu", "mx"],
                 "de" : ["de", "be", "li"],
-                "it" : ["it", "sm"]
+                "it" : ["it", "sm"],
+                "fr" : ["fr"]
             };
 
             if (!langToCountry[language]) {
@@ -71,7 +76,7 @@ new Vue ({
            */
 
             if (apiPath == null) {
-                return "";
+                return "../img/poster-image-coming-soon.png";
             }
 
             return `https://image.tmdb.org/t/p/${this.sizeCode}${apiPath}`;
@@ -79,19 +84,15 @@ new Vue ({
         },
 
         //funzione che converte i voti in numeri da 1 a 5
-        generateVote(originalVote) {
-            /*
-            -Ho il voto espresso con num decim da 1 a 10 in vote_average
-                -devo gestire il caso in cui il valore zia 0
-            -posso creare un nuovo valore dividendo vote_average per due e
-                arrotondando il risultato in eccesso con math.
-            -devo far ciclare le stelle per farle comparire
-                ora ciclano nella funzione.
-                non so se mi piace.
-            -per ottenere risultati specifici per ogni show il valore del voto
-                devev essere l'argomento della funz che specificherò in html.
-            */
-            return newVote = Math.ceil(originalVote / 2);
+        getMovieStars(originalVote) {
+            newVote = Math.ceil(originalVote / 2);
+            const toReturn = [];
+
+            for (let i = 0; i < 5; i++) {
+                toReturn.push(i <= newVote);
+            }
+
+            return toReturn;
         }
     }
 })

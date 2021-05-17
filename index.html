@@ -15,35 +15,44 @@
 </head>
 <body>
     <div id="app">
-        <!-- input e button cerca -->
-        <input type="text" v-model="query" placeholder="Cerca film o serie tv">
-        <button @click="doSearch">Cerca</button>
+        <header>
+            <h1>BOOLFLIX</h1>
+            <!-- input e button cerca -->
+            <div class="search-box">
+                <input type="text" v-model="query" placeholder="Cerca film o serie tv">
+                <button @click="doSearch">Cerca</button>
+            </div>
+        </header>
 
-        <!-- lista dei film trovati -->
-        <h2 v-if="movieList.length !== 0">Movies</h2>
-        <ul>
-            <li v-for="movie in movieList">Titolo:"{{movie.title}}"; 
-                Titolo originale:"{{movie.original_title}}"; 
-                Lingua originale: <span class="flag-icon" :class="getFlag(movie.original_language)"></span>{{movie.original_language}}; 
-                Voto: 
-                <div v-if="movie.vote_average !== 0" class="stars-container">
-                    <i class="fa fa-star" aria-hidden="true" v-for="numbers in generateVote(movie.vote_average)"></i>
-                </div>
-                <div class="stars-container" v-else>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                </div>;
-                Poster: <img :src="generateUrl(movie.poster_path)" alt=""></li>
-        </ul>
-
-        <!-- lista delle serie tv -->
-        <h2 v-if="tvSeriesList.length !== 0">Tv Series</h2>
-        <ul>
-            <li v-for="tvSerie in tvSeriesList">Titolo:"{{tvSerie.title}}"; 
-                Titolo originale:"{{tvSerie.original_title}}"; 
-                Lingua originale: <span class="flag-icon" :class="getFlag(tvSerie.original_language)"></span>{{tvSerie.original_language}}; 
-                Voto: <i class="fa fa-star" aria-hidden="true" v-for="numbers in generateVote(tvSerie.vote_average)"></i>;
-                Poster: <img :src="generateUrl(tvSerie.poster_path)" alt=""></li>
-        </ul>
+        <main>
+            <div class="container">
+                <ul>
+                    <!-- film -->
+                    <li v-for="movie in fullMoviesList">
+                        <div class="poster-container">
+                            <div class="show-info">
+                                <span> <strong>Titolo:</strong> "{{movie.title}}";</span>
+                                <span> <strong>Titolo originale:</strong> "{{movie.original_title}}"; </span>
+                                <span> <strong>Lingua originale:</strong>  <span class="flag-icon" :class="getFlag(movie.original_language)"></span>; </span>
+                                <span>
+                                    <strong>Voto: </strong> 
+                                    <div class="stars-container">
+                                        <i class="fa fa-star" :class="{'fa-star' : star, 'fa-star-o' : !star}" aria-hidden="true" v-for="star in getMovieStars(movie.vote_average)"></i>
+                                    </div>
+                                </span>
+                                <span>
+                                    <strong>Descrizione:</strong> {{movie.overview}}
+                                </span>
+                            </div>
+                            <div class="img-container">
+                                <img :src="generateUrl(movie.poster_path)" alt="">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+        </main>
 
     </div>
 

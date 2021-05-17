@@ -5,9 +5,85 @@
 }
 
 .flag-icon-default {
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .stars-container {
     display: inline;
+    color: orange
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(83, 83, 83);
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline-block;
+}
+
+header {
+    background-color: black;
+    height: 80px;
+    padding: 0px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+header h1 {
+    color: red;
+}
+
+.show-info {
+    color: white;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    overflow: auto;
+    display: none;
+}
+
+.show-info span {
+    display: block;
+}
+
+.poster-container {
+    padding: 15px;
+}
+
+.poster-container,
+.img-container {
+    overflow: hidden;
+    height: 507px;
+    width: 342px;
+}
+
+.poster-container:hover .show-info {
+    display: inline-block;
+    z-index: 2;
+}
+
+.poster-container:hover img {
+    display: none;
+}
+
+.img-container img {
+    height: 100%;
 }
