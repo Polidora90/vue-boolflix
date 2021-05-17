@@ -76,7 +76,7 @@ new Vue ({
            */
 
             if (apiPath == null) {
-                return "../img/poster-image-coming-soon.png";
+                return "../img/download2.jpg";
             }
 
             return `https://image.tmdb.org/t/p/${this.sizeCode}${apiPath}`;

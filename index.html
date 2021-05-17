@@ -32,8 +32,8 @@
                         <div class="poster-container">
                             <div class="show-info">
                                 <span> <strong>Titolo:</strong> "{{movie.title}}";</span>
-                                <span> <strong>Titolo originale:</strong> "{{movie.original_title}}"; </span>
-                                <span> <strong>Lingua originale:</strong>  <span class="flag-icon" :class="getFlag(movie.original_language)"></span>; </span>
+                                <span v-if="movie.title !== movie.original_title"> <strong>Titolo originale:</strong> "{{movie.original_title}}"; </span>
+                                <span> <strong>Lingua originale:</strong>  <span class="flag-icon" :class="getFlag(movie.original_language)"></span></span>
                                 <span>
                                     <strong>Voto: </strong> 
                                     <div class="stars-container">
@@ -41,11 +41,16 @@
                                     </div>
                                 </span>
                                 <span>
-                                    <strong>Descrizione:</strong> {{movie.overview}}
+                                    <strong>Descrizione:</strong> 
+                                    {{movie.overview}}
+                                </span>
+                                <span v-if="movie.overview == ''">
+                                    Descrizione non disponibile.
                                 </span>
                             </div>
                             <div class="img-container">
                                 <img :src="generateUrl(movie.poster_path)" alt="">
+                                <span class="tvserie-popup" v-if="movie.tvSeries == true">Serie <br> Tv!</span>
                             </div>
                         </div>
                     </li>
