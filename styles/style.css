@@ -60,9 +60,8 @@ header h1 {
     display: none;
 }
 
-.show-info span {
-    display: block;
-    padding-bottom: 5px;
+.show-info p {
+    padding-bottom: 7px;
 }
 
 .poster-container {

@@ -28,25 +28,30 @@
             <div class="container">
                 <ul>
                     <!-- film -->
-                    <li v-for="movie in fullMoviesList">
+                    <li v-for="movie in fullMoviesList" @click="getCast(movie)">
                         <div class="poster-container">
                             <div class="show-info">
-                                <span> <strong>Titolo:</strong> "{{movie.title}}";</span>
-                                <span v-if="movie.title !== movie.original_title"> <strong>Titolo originale:</strong> "{{movie.original_title}}"; </span>
-                                <span> <strong>Lingua originale:</strong>  <span class="flag-icon" :class="getFlag(movie.original_language)"></span></span>
-                                <span>
+                                <p> <strong>Titolo:</strong> "{{movie.title}}";</p>
+                                <p v-if="movie.title !== movie.original_title"> <strong>Titolo originale:</strong> "{{movie.original_title}}"; </p>
+                                <p> <strong>Lingua originale:</strong>  <span class="flag-icon" :class="getFlag(movie.original_language)"></span></p>
+                                <p>
                                     <strong>Voto: </strong> 
                                     <div class="stars-container">
                                         <i class="fa fa-star" :class="{'fa-star' : star, 'fa-star-o' : !star}" aria-hidden="true" v-for="star in getMovieStars(movie.vote_average)"></i>
                                     </div>
-                                </span>
-                                <span>
+                                </p>
+                                <p>
                                     <strong>Descrizione:</strong> 
                                     {{movie.overview}}
-                                </span>
-                                <span v-if="movie.overview == ''">
+                                </p>
+                                <p v-if="movie.overview == ''">
                                     Descrizione non disponibile.
-                                </span>
+                                </p>
+                                <p>Clicca qui per scoprire il cast...</p>
+                                <p v-if="movie.actors == ''">Le informazioni non sono al momento disponibili.</p>
+                                <p class="cast" v-if="movie.actors">
+                                    <span v-for="actors in movie.actors.slice(0, 5)">{{actors.original_name}}</span>
+                                </p>
                             </div>
                             <div class="img-container">
                                 <img :src="generateUrl(movie.poster_path)" alt="">

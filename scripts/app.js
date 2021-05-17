@@ -93,6 +93,27 @@ new Vue ({
             }
 
             return toReturn;
+        },
+
+        getCast(movie) {
+            //se la chiave acrors esiste già fermp la funzione
+            if (movie.actors) {
+                return;
+            };
+
+            const axiosOptions = {
+                params: {
+                    api_key: "c8a6a5493ec7223e34efa320cd602f6c",
+                    language: "it-IT"
+                }
+            };
+
+            const movieType = movie.tvSeries ? "tv" : "movie";
+
+            axios.get(`https://api.themoviedb.org/3/${movieType}/${movie.id}/credits`, axiosOptions)
+                .then(resp => {
+                    this.$set(movie, "actors", resp.data.cast);
+            });
         }
     }
 })
