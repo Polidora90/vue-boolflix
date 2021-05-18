@@ -18,6 +18,10 @@ body {
     background-color: rgb(83, 83, 83);
 }
 
+.no-focus:focus {
+    outline: none;
+}
+
 ul {
     list-style-type: none;
 }

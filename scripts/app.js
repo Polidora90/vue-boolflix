@@ -7,7 +7,9 @@ new Vue ({
         myFlagClass: "",
         defaultFlag: "flag-icon-default",
         sizeCode: "w342",
-        newVote: 0
+        newVote: 0,
+        moviesGenres: [],
+        tvSeriesGenres: []
     },
     computed: {
         fullMoviesList() {
@@ -96,7 +98,7 @@ new Vue ({
         },
 
         getCast(movie) {
-            //se la chiave acrors esiste già fermp la funzione
+            //se la chiave actors esiste già fermo la funzione
             if (movie.actors) {
                 return;
             };
@@ -114,6 +116,40 @@ new Vue ({
                 .then(resp => {
                     this.$set(movie, "actors", resp.data.cast);
             });
+        },
+
+        decodeGenres(movie) {
+            if (movie.genresDescription) {
+                return;
+            }
+        },
+
+        getGenres(movieType) {
+            const axiosOptions = {
+                params: {
+                    api_key: "c8a6a5493ec7223e34efa320cd602f6c",
+                    language: "it-IT"
+                }
+            };
+
+            axios.get(`https://api.themoviedb.org/3/genre/${movieType}/list`, axiosOptions)
+            .then(resp => {
+                if (movieType == 'movie') {
+                    this.moviesGenres = resp.data.genres;
+                } else {
+                    this.tvSeriesGenres = resp.data.genres;
+                }
+            })
+
+        },
+
+        getAddInfo(movie) {
+            this.getCast(movie);
+            this.decodeGenres(movie);
         }
+    },
+    mounted() {
+        this.getGenres('tv');
+        this.getGenres('movie');
     }
 })

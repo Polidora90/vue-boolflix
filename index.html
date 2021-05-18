@@ -19,7 +19,7 @@
             <h1>BOOLFLIX</h1>
             <!-- input e button cerca -->
             <div class="search-box">
-                <input type="text" v-model="query" placeholder="Cerca film o serie tv">
+                <input class="no-focus" type="text" v-model="query" placeholder="Cerca film o serie tv">
                 <button @click="doSearch">Cerca</button>
             </div>
         </header>
@@ -28,7 +28,7 @@
             <div class="container">
                 <ul>
                     <!-- film -->
-                    <li v-for="movie in fullMoviesList" @click="getCast(movie)">
+                    <li v-for="movie in fullMoviesList" @click="getAddInfo(movie)">
                         <div class="poster-container">
                             <div class="show-info">
                                 <p> <strong>Titolo:</strong> "{{movie.title}}";</p>
