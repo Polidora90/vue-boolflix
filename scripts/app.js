@@ -87,10 +87,10 @@ new Vue ({
 
         //funzione che converte i voti in numeri da 1 a 5
         getMovieStars(originalVote) {
-            newVote = Math.ceil(originalVote / 2);
+            newVote = Math.round(originalVote / 2);
             const toReturn = [];
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 1; i <= 5; i++) {
                 toReturn.push(i <= newVote);
             }
 
